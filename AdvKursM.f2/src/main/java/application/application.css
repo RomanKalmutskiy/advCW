@@ -1,0 +1,19 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.label{
+	-fx-text-fill:green;
+	-fx-font-size: 16px;
+	-fx-font-family: "Arial Black";
+	 -fx-font-weight: bold;
+	 }
+	
+.button {-fx-text-fill: blue;
+	-fx-font-size: 18px;
+	-fx-background-radius: 5;
+}
+
+.label {
+    -fx-background-color: white;
+    -fx-font: bold italic 18pt "Arial";
+    -fx-background-radius: 5;
+    
+}

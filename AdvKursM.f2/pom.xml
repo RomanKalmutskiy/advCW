@@ -1,0 +1,122 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>ua.itea</groupId>
+  <artifactId>AdvKursM</artifactId>
+  <version>KalmutskiyRoman</version>
+  <packaging>jar</packaging>
+
+	<name>Play</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<build>
+	
+		<plugins>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					 <archive>
+            <manifest>
+              <mainClass>application.Main</mainClass>
+            </manifest>
+          </archive>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id> <!-- this is used for inheritance merges -->
+						<phase>package</phase> <!-- bind to the packaging phase -->
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>	
+			
+		</plugins>
+		
+	</build>
+	<dependencies>
+		
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.43</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	
+	
+	
+	
+	
+	<profiles>
+		<profile>
+			<id>install-javafx</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-install-plugin</artifactId>
+						<version>2.3.1</version>
+						<executions>
+							<execution>
+								<id>install-javafx</id>
+								<goals>
+									<goal>install-file</goal>
+								</goals>
+								<phase>validate</phase>
+								<configuration>
+									<file>${jfx-runtime}/lib/jfxrt.jar</file>
+									<groupId>javafx</groupId>
+									<artifactId>javafx</artifactId>
+									<version>${jfx-version}</version>
+									<packaging>jar</packaging>
+									<javadoc>${jfx-runtime}/../docs/api.zip</javadoc>
+									<!--<sources>no source available</sources> -->
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-resources-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>install-javafx-bin</id>
+								<phase>validate</phase>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>${settings.localRepository}/javafx/javafx</outputDirectory>
+									<useBuildFilters>false</useBuildFilters>
+									<resources>
+										<resource>
+											<directory>${jfx-runtime}</directory>
+											<includes>
+												<include>bin/*.dll</include>
+											</includes>
+										</resource>
+									</resources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+	
+	
+</project>
